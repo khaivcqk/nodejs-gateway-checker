@@ -1,6 +1,6 @@
-const transactionModel = require("./logs.model.js");
-const nonceModel = require("./nonce.model.js");
-const web3 = require("./web3.model.js");
+const transactionModel = require("./model/logs.model.js");
+const nonceModel = require("./model/nonce.model.js");
+const web3 = require("./model/web3.model.js");
 
 async function Checker() {
     const data = await transactionModel.find({
