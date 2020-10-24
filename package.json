@@ -1,0 +1,27 @@
+{
+  "name": "checker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "logs.model.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/node": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "babel": "^6.23.0",
+    "es2015": "0.0.0",
+    "es2017": "0.0.0",
+    "nodemon": "^2.0.5",
+    "transform-class-properties": "^1.0.0-beta"
+  },
+  "dependencies": {
+    "await-sleep": "0.0.1",
+    "mongoose": "^5.10.9",
+    "redis": "^3.0.2"
+  }
+}
