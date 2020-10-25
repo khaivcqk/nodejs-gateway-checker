@@ -20,7 +20,7 @@ async function Checker() {
                     await transactionModel.updateOne({ _id: element._id }, { status: "FAIL" })
                     const nonce = await web3.eth.getTransactionCount(receipt.from);
                     //update nonce
-                    nonceModel.set(element.txID, nonce)
+                    nonceModel.set(receipt.from, nonce)
                 }
             }
             //no receipt
@@ -30,7 +30,7 @@ async function Checker() {
                     await transactionModel.updateOne({ _id: element._id },  { status: "FAIL" })
                     // Update Nonce
                     const nonce = await web3.eth.getTransactionCount(receipt.from)
-                    nonceModel.set(element.txID, nonce)
+                    nonceModel.set(receipt.from, nonce)
                 }
                 // CheckedTimes < 50
                 else {
