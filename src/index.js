@@ -1,7 +1,7 @@
 const transactionModel = require("./model/logs.model.js");
 const nonceModel = require("./model/nonce.model.js");
 const web3 = require("./model/web3.model.js");
-
+console.time('checker');
 async function Checker() {
     const data = await transactionModel.find({
         "status": 'PENDING'
@@ -9,6 +9,7 @@ async function Checker() {
 
     data.forEach(async element => {
         const receipt = await web3.eth.getTransactionReceipt(element.txID);
+        //console.log(receipt)
             // have receipt
             if (receipt){
                 //receipt.status return true
@@ -18,9 +19,9 @@ async function Checker() {
                 //receipt.status return false
                 else {
                     await transactionModel.updateOne({ _id: element._id }, { status: "FAIL" })
-                    const nonce = await web3.eth.getTransactionCount(receipt.from);
+                    //const nonce = await web3.eth.getTransactionCount(receipt.from);
                     //update nonce
-                    nonceModel.set(receipt.from, nonce)
+                    //nonceModel.set(receipt.from, nonce)
                 }
             }
             //no receipt
@@ -29,8 +30,8 @@ async function Checker() {
                 if (element.checkedTimes == 50) {
                     await transactionModel.updateOne({ _id: element._id },  { status: "FAIL" })
                     // Update Nonce
-                    const nonce = await web3.eth.getTransactionCount(receipt.from)
-                    nonceModel.set(receipt.from, nonce)
+                    //const nonce = await web3.eth.getTransactionCount(receipt.from)
+                    //nonceModel.set(receipt.from, nonce)
                 }
                 // CheckedTimes < 50
                 else {
@@ -40,5 +41,6 @@ async function Checker() {
     });
 }
 Checker();
+console.timeEnd("checker");
 // set time to repeat: 100ms
-setInterval(Checker, 100);
+//setInterval(Checker, 100);
